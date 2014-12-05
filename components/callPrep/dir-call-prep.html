@@ -1,0 +1,26 @@
+<h3>Industry Call Prep</h3>
+<tabset type="pills" justified="true">
+    <tab heading="Fast Facts"  ng-show="callFact">
+        <p ng-repeat="f in callFact">
+            {{f.fact}}
+        </p>
+    </tab>
+    <tab heading="Talking Points" ng-show="callTalk" >
+        <div ng-repeat="t in callTalk | limitTo: 1">
+            <p><strong>{{t.title}}</strong></p>
+            <p>{{t.description}}</p>
+        </div>
+    </tab>
+    <tab heading="Challenges"  ng-show="callCha" >
+        <div ng-repeat="c in callCha | limitTo: 1">
+            <p><strong>{{c.title}}</strong></p>
+            <p>{{c.description}}</p>
+        </div>
+    </tab>
+    <tab heading="Opportunities"  ng-show="callOpp" >
+        <div ng-repeat="o in callOpp | limitTo: 1">
+            <p><strong>{{o.title}}</strong></p>
+            <p>{{o.description}}</p>
+        </div>
+    </tab>
+</tabset>

@@ -1,0 +1,61 @@
+<div class="full-bg-dark">
+   <!--  <div ui-view="header"></div> -->
+   <theme-switcher urls="theme.urls"></theme-switcher>
+   <div class="container">
+       <div class="row">
+           <div class="col-md-3 col-sm-3">
+               <h1><a href="/"><img src="http://dnbdirectapps.com/static/img/logo-dnb.gif" alt="Dun &amp; Bradstreet"></a>
+               D&B Direct {{title}} APIdemo</h1>
+           </div>
+           <div class="col-md-5 col-sm-5">
+                <ul class="header-links">
+                   <li><a ui-sref=".industryInsight">industryInsight</a></li>
+                   <li><a ui-sref=".callPrep">callPrep</a></li>
+                   <li><a ui-sref=".financialSummary">financialSummary</a></li>
+                   <li><a ui-sref=".companyInsight">companyInsight</a></li>
+                </ul>
+           </div>
+           <div class="col-md-1 col-sm-1 pull-right">
+                <a ui-sref="login" class="btn btn-default">log out</a>
+           </div>
+           <div class="col-md-2 col-sm-2 pull-right">
+               <div ng-repeat="theme in themes" class="theme-picks">
+                   <a href ng-click="setTheme(theme)">{{theme.name}}</a>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-10">
+        <div ui-view="main.industryInsight"></div>
+        <div ui-view="main.callPrep"></div>
+        <div ui-view="main.financialSummary"></div>
+        <div ui-view="main.companyInsight"></div>
+    </div>
+
+
+    <div class="col-md-2">
+        <div id="sidebarRight">
+            <div class="sidebar right">
+
+
+                <h3>Selected Layers</h3>
+          <div ng-repeat="item in layerThing">
+            {{ item }}<br />
+          </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="show-code" class="slide-panel">
+    <div class="row">
+        <h2>title</h2>
+        <p>text</p>
+        <a id="show-code-close" class="button" >Close</a>
+    </div>
+</div>

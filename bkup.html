@@ -1,0 +1,321 @@
+
+        <!-- MICROAPP DISPLAY -->
+        <div class="main-content">
+            <!-- TOOL BAR -->
+            <div class="container main-head">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div ng-show="selection">
+                            <a href="index.html" target='_self' class="btn btn-default pull-right"><i class="fa fa-refresh fa-fw"></i> start over</a>
+                        </div>
+                        <div id="search-wrapper" class="form-group" ng-show="!selection">
+                                <input type="text"
+                                    ng-model="name"
+                                    typeahead-min-length="2"
+                                    placeholder="Company name or keyword(s)"
+                                    typeahead="match.name for match in getCompany($viewValue)"
+                                    typeahead-loading="loadingCompanies"
+                                    typeahead-on-select="onSelect($item,$model,$label)"
+                                    class="form-control"
+                                    autofocus
+                                >
+                                <!--<i ng-show="loadingCompanies" class="glyphicon glyphicon-refresh" ng-show="!selection"></i>-->
+                            <div class="results-group" ng-repeat="res in results" >
+                                <div ng-click="pickOne(res.companyResults.duns)" class="results-box">
+                                    <h4>{{res.companyResults.companyName }} &ndash; {{res.companyResults.locationType }}</h4>
+                                    <p>{{res.companyResults.city}}, {{res.companyResults.stateOrProvince }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- RESULTS AREA -->
+            </div>
+
+            <!-- ------------- SHOW THE DATA ------------------ -->
+            <div ng-hide="!selection">
+                <!-- ------------- SHOW COMPANY HEADER BOX ------------------ -->
+                <div ng-include="'company-head.html'"></div>
+                <div class="container">
+                    <!-- ------------- BASIC COMPANY INFO ------------------ -->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="row-top">Basic Financial Information</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div ng-show="basic.companyType">
+                                        <h5 class="soft">Company Type</h5>
+                                        <h5>{{basic.companyType}}</h5>
+                                    </div>
+                                    <div ng-show="basic.location">
+                                        <h5 class="soft">Location</h5>
+                                        <h5>{{basic.location}}</h5>
+                                    </div>
+                                    <div ng-show="basic.fiscalYearEnd">
+                                        <h5 class="soft">Fiscal Year End</h5>
+                                        <h5>{{basic.fiscalYearEnd}}</h5>
+                                    </div>
+                                   <div ng-show="basic.auditor">
+                                        <h5 class="soft">Auditor</h5>
+                                        <h5>{{basic.auditor}}</h5>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                   <div ng-show="sales">
+                                        <h5 class="soft">{{basic.latestYearSales.year}} Sales</h5>
+                                        <h5>{{sales}}</h5>
+                                    </div>
+                                   <div ng-show="basic.oneYearSalesGrowthPct">
+                                       <h5 class="soft">1yr Sales Growth</h5>
+                                        <h5>{{basic.oneYearSalesGrowthPct}}%</h5>
+                                    </div>
+                                   <div ng-show="netIncome">
+                                        <h5 class="soft">{{basic.latestYearNetIncome.year}} Net Income</h5>
+                                        <h5>{{netIncome}}</h5>
+                                    </div>
+                                   <div ng-show="basic.oneYearNetIncomeGrowthPct">
+                                        <h5 class="soft">1yr Net Income Growth</h5>
+                                        <h5>{{basic.oneYearNetIncomeGrowthPct}}%</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>Primary Stock/Exchange</h3>
+                                    <ul class="mini-table">
+                                        <li ng-repeat="data in basic.exchanges  | limitTo:4">
+                                            <span class="exchange">{{data.exchangeName}}</span> &ndash;
+                                            <span class="ticker">{{data.tickerSymbol}}</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="mini-table" collapse="!isCollapsed">
+                                        <li ng-repeat="data in basic.exchanges.slice(4, 100)  | limitTo:quanShow">
+                                            <span class="exchange">{{data.exchangeName}}</span> &ndash;
+                                            <span class="ticker">{{data.tickerSymbol}}</span>
+                                        </li>
+                                    </ul>
+                                        <button class="btn btn-default downsized">
+                                            <span ng-click="isCollapsed = !isCollapsed" ng-show="isCollapsed">show less</span>
+                                            <span ng-click="isCollapsed = !isCollapsed" ng-hide="isCollapsed">show all</span>
+                                        </button>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div ng-hide="seeCallPrep">
+                                <h3>Market Analysis</h3>
+                                <tabset  type="pills" class="tab-section" justified="true">
+                                    <tab heading="Bulls Say...">
+                                        <p>{{market.bullsSay}}</p>
+                                    </tab>
+                                    <tab heading="Bears Say...">
+                                        <p>{{market.bearsSay}}</p>
+                                    </tab>
+                                </tabset>
+                            </div>
+                            <div ng-show="seeCallPrep">
+                                <h3>Industry Call Prep</h3>
+                                <tabset type="pills" justified="true">
+                                    <tab heading="Fast Facts"  ng-show="callFact">
+                                        <p ng-repeat="f in callFact">
+                                            {{f.fact}}
+                                        </p>
+                                    </tab>
+                                    <tab heading="Talking Points" ng-show="callTalk" >
+                                        <div ng-repeat="t in callTalk | limitTo: 1">
+                                            <p><strong>{{t.title}}</strong></p>
+                                            <p>{{t.description}}</p>
+                                        </div>
+                                    </tab>
+                                    <tab heading="Challenges"  ng-show="callCha" >
+                                        <div ng-repeat="c in callCha | limitTo: 1">
+                                            <p><strong>{{c.title}}</strong></p>
+                                            <p>{{c.description}}</p>
+                                        </div>
+                                    </tab>
+                                    <tab heading="Opportunities"  ng-show="callOpp" >
+                                        <div ng-repeat="o in callOpp | limitTo: 1">
+                                            <p><strong>{{o.title}}</strong></p>
+                                            <p>{{o.description}}</p>
+                                        </div>
+                                    </tab>
+                                </tabset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                             <h3>Comparison to Industry & Market</h3>
+                             <nvd3 options="options1" data="data1" width="1200px"></nvd3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Income Statements</h3>
+                            <tabset  type="pills">
+                                <tab heading="Annual Income Statements">
+                                    <table class="table table-responsive table-hover">
+                                        <thead>
+                                            <th></th>
+                                            <th>{{annual.previousYears[3].year}}</th>
+                                            <th>{{annual.previousYears[2].year}}</th>
+                                            <th>{{annual.previousYears[1].year}}</th>
+                                            <th>{{annual.previousYears[0].year}}</th>
+                                            <th>{{annual.latestYear.year}}</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Revenue</td>
+                                                <td>{{annual.previousYears[3].revenue}} M</td>
+                                                <td>{{annual.previousYears[2].revenue}} M</td>
+                                                <td>{{annual.previousYears[1].revenue}} M</td>
+                                                <td>{{annual.previousYears[0].revenue}} M</td>
+                                                <td>{{annual.latestYear.revenue}} M</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gross Profit</td>
+                                                <td>{{annual.previousYears[3].grossProfit}} M</td>
+                                                <td>{{annual.previousYears[2].grossProfit}} M</td>
+                                                <td>{{annual.previousYears[1].grossProfit}} M</td>
+                                                <td>{{annual.previousYears[0].grossProfit}} M</td>
+                                                <td>{{annual.latestYear.grossProfit}} M</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Operating Income</td>
+                                                <td>{{annual.previousYears[3].operatingIncome}} M</td>
+                                                <td>{{annual.previousYears[2].operatingIncome}} M</td>
+                                                <td>{{annual.previousYears[1].operatingIncome}} M</td>
+                                                <td>{{annual.previousYears[0].operatingIncome}} M</td>
+                                                <td>{{annual.latestYear.operatingIncome}} M</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Net Income</td>
+                                                <td>{{annual.previousYears[3].totalNetIncome}} M</td>
+                                                <td>{{annual.previousYears[2].totalNetIncome}} M</td>
+                                                <td>{{annual.previousYears[1].totalNetIncome}} M</td>
+                                                <td>{{annual.previousYears[0].totalNetIncome}} M</td>
+                                                <td>{{annual.latestYear.totalNetIncome}} M</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Diluted EPS (Net Income)</td>
+                                                <td>{{annual.previousYears[3].dilutedEPS}} M</td>
+                                                <td>{{annual.previousYears[2].dilutedEPS}} M</td>
+                                                <td>{{annual.previousYears[1].dilutedEPS}} M</td>
+                                                <td>{{annual.previousYears[0].dilutedEPS}} M</td>
+                                                <td>{{annual.latestYear.dilutedEPS}} M</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </tab>
+                                <tab heading="Quarterly  Income Statements">
+                                    <table class="table table-responsive table-hover">
+                                        <thead>
+                                            <th></th>
+                                            <th>{{quarterly.previousQuarters[3].quarterMonth}} {{quarterly.previousQuarters[3].quarterYear}}</th>
+                                            <th>{{quarterly.previousQuarters[2].quarterMonth}} {{quarterly.previousQuarters[2].quarterYear}}</th>
+                                            <th>{{quarterly.previousQuarters[1].quarterMonth}} {{quarterly.previousQuarters[1].quarterYear}} </th>
+                                            <th>{{quarterly.previousQuarters[0].quarterMonth}} {{quarterly.previousQuarters[0].quarterYear}}</th>
+                                            <th>{{quarterly.latestQuarter.quarterMonth}} {{quarterly.latestQuarter.quarterYear}}</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Revenue</td>
+                                                <td>{{quarterly.previousQuarters[3].revenue}} M</td>
+                                                <td>{{quarterly.previousQuarters[2].revenue}} M</td>
+                                                <td>{{quarterly.previousQuarters[1].revenue}} M</td>
+                                                <td>{{quarterly.previousQuarters[0].revenue}} M</td>
+                                                <td>{{quarterly.latestQuarter.revenue}} M</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gross Profit</td>
+                                                <td>{{quarterly.previousQuarters[3].grossProfit}} M</td>
+                                                <td>{{quarterly.previousQuarters[2].grossProfit}} M</td>
+                                                <td>{{quarterly.previousQuarters[1].grossProfit}} M</td>
+                                                <td>{{quarterly.previousQuarters[0].grossProfit}} M</td>
+                                                <td>{{quarterly.latestQuarter.grossProfit}} M</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Operating Income</td>
+                                                <td>{{quarterly.previousQuarters[3].operatingIncome}} M</td>
+                                                <td>{{quarterly.previousQuarters[2].operatingIncome}} M</td>
+                                                <td>{{quarterly.previousQuarters[1].operatingIncome}} M</td>
+                                                <td>{{quarterly.previousQuarters[0].operatingIncome}} M</td>
+                                                <td>{{quarterly.latestQuarter.operatingIncome}} M</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Net Income</td>
+                                                <td>{{quarterly.previousQuarters[3].totalNetIncome}} M</td>
+                                                <td>{{quarterly.previousQuarters[2].totalNetIncome}} M</td>
+                                                <td>{{quarterly.previousQuarters[1].totalNetIncome}} M</td>
+                                                <td>{{quarterly.previousQuarters[0].totalNetIncome}} M</td>
+                                                <td>{{quarterly.latestQuarter.totalNetIncome}} M</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Diluted EPS (Net Income)</td>
+                                                <td>{{quarterly.previousQuarters[3].dilutedEPS}} M</td>
+                                                <td>{{quarterly.previousQuarters[2].dilutedEPS}} M</td>
+                                                <td>{{quarterly.previousQuarters[1].dilutedEPS}} M</td>
+                                                <td>{{quarterly.previousQuarters[0].dilutedEPS}} M</td>
+                                                <td>{{quarterly.latestQuarter.dilutedEPS}} M</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </tab>
+                            </tabset>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Comparison to Top Competition: Revenue</h3>
+                            <nvd3 options="options2" data="data2" style="width: 1200px;"></nvd3>
+                        </div>
+                    </div>
+
+                    <!-- ------------- SHOW/HIDE PEOPLE BOXES ------------------
+                    <div ng-include="'people.html'"></div>
+                    ------------------ ------------------ ------------------ ------------------ -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Top Competitors</h3>
+                            <table class="table table-responsive table-hover wrapup">
+                                <thead>
+                                    <tr>
+                                        <th ></th>
+                                        <th class="wrapped">{{whois.name}}</th>
+                                        <th class="wrapped"><a href="?d={{comp1duns}}">{{comp1}}</a></th>
+                                        <th class="wrapped"><a href="?d={{comp2duns}}">{{comp2}}</a></th>
+                                        <th class="wrapped"><a href="?d={{comp3duns}}">{{comp3}}</a></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Annual Sales</td>
+                                        <td>{{annual.latestYear.revenue}} M</td>
+                                        <td>{{comp1sales}}</td>
+                                        <td>{{comp2sales}}</td>
+                                        <td>{{comp3sales}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Employees</td>
+                                        <td> &mdash; </td>
+                                        <td>{{topComp.competitor1.employees | number}}</td>
+                                        <td>{{topComp.competitor2.employees | number}}</td>
+                                        <td>{{topComp.competitor3.employees | number}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Market Cap</td>
+                                        <td> &mdash; </td>
+                                        <td>{{comp1cap}}</td>
+                                        <td>{{comp2cap}}</td>
+                                        <td>{{comp3cap}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

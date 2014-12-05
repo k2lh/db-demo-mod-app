@@ -1,0 +1,28 @@
+<div class="main-head">
+    <div class="row">
+        <div class="col-md-9">
+            <div ng-show="selection">
+                <button ng-click="startOver()" class="btn btn-default"><i class="fa fa-refresh fa-fw"></i> start over</button>
+                <a  class="btn btn-default" pageslide="bottom" ps-speed="0.5" href="#show-code">view code</a>
+            </div>
+            <div id="search-wrapper" class="form-group" ng-show="!selection">
+                    <input type="text"
+                        ng-model="name"
+                        typeahead-min-length="2"
+                        placeholder="Company name or keyword(s)"
+                        typeahead="match.name for match in getCompany($viewValue)"
+                        typeahead-loading="loadingCompanies"
+                        typeahead-on-select="onSelect($item,$model,$label)"
+                        class="form-control"
+                        autofocus
+                    >
+                <div class="results-group" ng-repeat="res in results" >
+                    <div ng-click="pickOne(res.companyResults.duns)" class="results-box">
+                        <h4>{{res.companyResults.companyName}} &ndash; {{res.companyResults.locationType}}</h4>
+                        <p>{{res.companyResults.city}}, {{res.companyResults.stateOrProvince}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

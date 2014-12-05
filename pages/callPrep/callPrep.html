@@ -1,0 +1,21 @@
+<div class="sidebar">
+                    <div basic-financial ng-controller="basicFinancialCtrl"></div>
+</div>
+<div id="contentMain" class="main-content">
+    <div company-search></div>
+    <div ng-hide="!selection">
+        <div company-banner ng-controller="companyBannerCtrl"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div market-analysis ng-controller="marketAnalysisCtrl"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div income-statements ng-controller="incomeStatementsCtrl"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div

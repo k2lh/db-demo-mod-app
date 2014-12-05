@@ -1,0 +1,71 @@
+<!-- sidebar + company setup -->
+<div sidebar></div>
+<div id="contentMain" class="main-content">
+    <div company-search></div>
+    <div ng-hide="!selection">
+        <div company-banner ng-controller="companyBannerCtrl"></div>
+        <div class="container">
+
+            <!-- ------------- BASIC COMPANY INFO ------------------ -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div compare-industry-market compare="industryMarket"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div income-statements ng-controller="incomeStatementsCtrl"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Comparison to Top Competition: Revenue</h3>
+                    <nvd3 options="options2" data="data2" style="width: 1200px;"></nvd3>
+                </div>
+            </div>
+
+            <!-- ------------- SHOW/HIDE PEOPLE BOXES ------------------ -->
+            <!-- <div ng-controller="peopleCtrl" financial-contacts people="people"></div> -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Top Competitors</h3>
+                    <table class="table table-responsive table-hover wrapup">
+                        <thead>
+                            <th ></th>
+                            <th class="wrapped">{{whois.name}}</th>
+                            <th class="wrapped"><a href="?d={{comp1duns}}">{{comp1}}</th>
+                            <th class="wrapped"><a href="?d={{comp2duns}}">{{comp2}}</th>
+                            <th class="wrapped"><a href="?d={{comp3duns}}">{{comp3}}</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Annual Sales</td>
+                                <td>{{annual.latestYear.revenue}} M</td>
+                                <td>{{comp1sales}}</td>
+                                <td>{{comp2sales}}</td>
+                                <td>{{comp3sales}}</td>
+                            </tr>
+                            <tr>
+                                <td>Employees</td>
+                                <td> &mdash; </td>
+                                <td>{{topComp.competitor1.employees | number}}</td>
+                                <td>{{topComp.competitor2.employees | number}}</td>
+                                <td>{{topComp.competitor3.employees | number}}</td>
+                            </tr>
+                            <tr>
+                                <td>Market Cap</td>
+                                <td> &mdash; </td>
+                                <td>{{comp1cap}}</td>
+                                <td>{{comp2cap}}</td>
+                                <td>{{comp3cap}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+               </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

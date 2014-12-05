@@ -1,0 +1,61 @@
+<h3 class="row-top">Basic Financial Information</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div ng-show="basic.companyType">
+                <h5 class="soft">Company Type</h5>
+                <h5>{{basic.companyType}}</h5>
+            </div>
+            <div ng-show="basic.location">
+                <h5 class="soft">Location</h5>
+                <h5>{{basic.location}}</h5>
+            </div>
+            <div ng-show="basic.fiscalYearEnd">
+                <h5 class="soft">Fiscal Year End</h5>
+                <h5>{{basic.fiscalYearEnd}}</h5>
+            </div>
+           <div ng-show="basic.auditor">
+                <h5 class="soft">Auditor</h5>
+                <h5>{{basic.auditor}}</h5>
+            </div>
+        </div>
+        <div class="col-md-6">
+           <div ng-show="sales">
+                <h5 class="soft">{{basic.latestYearSales.year}} Sales</h5>
+                <h5>{{sales}}</h5>
+            </div>
+           <div ng-show="basic.oneYearSalesGrowthPct">
+               <h5 class="soft">1yr Sales Growth</h5>
+                <h5>{{basic.oneYearSalesGrowthPct}}%</h5>
+            </div>
+           <div ng-show="netIncome">
+                <h5 class="soft">{{basic.latestYearNetIncome.year}} Net Income</h5>
+                <h5>{{netIncome}}</h5>
+            </div>
+           <div ng-show="basic.oneYearNetIncomeGrowthPct">
+                <h5 class="soft">1yr Net Income Growth</h5>
+                <h5>{{basic.oneYearNetIncomeGrowthPct}}%</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Primary Stock/Exchange</h3>
+            <ul class="mini-table">
+                <li ng-repeat="data in basic.exchanges  | limitTo:4">
+                    <span class="exchange">{{data.exchangeName}}</span> &ndash;
+                    <span class="ticker">{{data.tickerSymbol}}</span>
+                </li>
+            </ul>
+            <ul class="mini-table" collapse="!isCollapsed">
+                <li ng-repeat="data in basic.exchanges.slice(4, 100)  | limitTo:quanShow">
+                    <span class="exchange">{{data.exchangeName}}</span> &ndash;
+                    <span class="ticker">{{data.tickerSymbol}}</span>
+                </li>
+            </ul>
+                <button class="btn btn-default downsized">
+                    <span ng-click="isCollapsed = !isCollapsed" ng-show="isCollapsed">show less</span>
+                    <span ng-click="isCollapsed = !isCollapsed" ng-hide="isCollapsed">show all</span>
+                </button>
+            </ul>
+        </div>
+    </div>

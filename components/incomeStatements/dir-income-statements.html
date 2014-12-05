@@ -1,0 +1,111 @@
+<h3>Income Statements</h3>
+<tabset  type="pills"  class="tab-section" justified="true">
+    <tab heading="Annual Income Statements">
+        <table class="table table-responsive table-hover">
+            <thead>
+                <th></th>
+                <th>{{annual.previousYears[3].year}}</th>
+                <th>{{annual.previousYears[2].year}}</th>
+                <th>{{annual.previousYears[1].year}}</th>
+                <th>{{annual.previousYears[0].year}}</th>
+                <th>{{annual.latestYear.year}}</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Revenue</td>
+                    <td>{{annual.previousYears[3].revenue}} M</td>
+                    <td>{{annual.previousYears[2].revenue}} M</td>
+                    <td>{{annual.previousYears[1].revenue}} M</td>
+                    <td>{{annual.previousYears[0].revenue}} M</td>
+                    <td>{{annual.latestYear.revenue}} M</td>
+                </tr>
+                <tr>
+                    <td>Gross Profit</td>
+                    <td>{{annual.previousYears[3].grossProfit}} M</td>
+                    <td>{{annual.previousYears[2].grossProfit}} M</td>
+                    <td>{{annual.previousYears[1].grossProfit}} M</td>
+                    <td>{{annual.previousYears[0].grossProfit}} M</td>
+                    <td>{{annual.latestYear.grossProfit}} M</td>
+                </tr>
+                <tr>
+                    <td>Operating Income</td>
+                    <td>{{annual.previousYears[3].operatingIncome}} M</td>
+                    <td>{{annual.previousYears[2].operatingIncome}} M</td>
+                    <td>{{annual.previousYears[1].operatingIncome}} M</td>
+                    <td>{{annual.previousYears[0].operatingIncome}} M</td>
+                    <td>{{annual.latestYear.operatingIncome}} M</td>
+                </tr>
+                <tr>
+                    <td>Total Net Income</td>
+                    <td>{{annual.previousYears[3].totalNetIncome}} M</td>
+                    <td>{{annual.previousYears[2].totalNetIncome}} M</td>
+                    <td>{{annual.previousYears[1].totalNetIncome}} M</td>
+                    <td>{{annual.previousYears[0].totalNetIncome}} M</td>
+                    <td>{{annual.latestYear.totalNetIncome}} M</td>
+                </tr>
+                <tr>
+                    <td>Diluted EPS (Net Income)</td>
+                    <td>{{annual.previousYears[3].dilutedEPS}} M</td>
+                    <td>{{annual.previousYears[2].dilutedEPS}} M</td>
+                    <td>{{annual.previousYears[1].dilutedEPS}} M</td>
+                    <td>{{annual.previousYears[0].dilutedEPS}} M</td>
+                    <td>{{annual.latestYear.dilutedEPS}} M</td>
+                </tr>
+            </tbody>
+        </table>
+    </tab>
+    <tab heading="Quarterly  Income Statements">
+        <table class="table table-responsive table-hover">
+            <thead>
+                <th></th>
+                <th>{{quarterly.previousQuarters[3].quarterMonth}} {{quarterly.previousQuarters[3].quarterYear}}</th>
+                <th>{{quarterly.previousQuarters[2].quarterMonth}} {{quarterly.previousQuarters[2].quarterYear}}</th>
+                <th>{{quarterly.previousQuarters[1].quarterMonth}} {{quarterly.previousQuarters[1].quarterYear}} </th>
+                <th>{{quarterly.previousQuarters[0].quarterMonth}} {{quarterly.previousQuarters[0].quarterYear}}</th>
+                <th>{{quarterly.latestQuarter.quarterMonth}} {{quarterly.latestQuarter.quarterYear}}</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Revenue</td>
+                    <td>{{quarterly.previousQuarters[3].revenue}} M</td>
+                    <td>{{quarterly.previousQuarters[2].revenue}} M</td>
+                    <td>{{quarterly.previousQuarters[1].revenue}} M</td>
+                    <td>{{quarterly.previousQuarters[0].revenue}} M</td>
+                    <td>{{quarterly.latestQuarter.revenue}} M</td>
+                </tr>
+                <tr>
+                    <td>Gross Profit</td>
+                    <td>{{quarterly.previousQuarters[3].grossProfit}} M</td>
+                    <td>{{quarterly.previousQuarters[2].grossProfit}} M</td>
+                    <td>{{quarterly.previousQuarters[1].grossProfit}} M</td>
+                    <td>{{quarterly.previousQuarters[0].grossProfit}} M</td>
+                    <td>{{quarterly.latestQuarter.grossProfit}} M</td>
+                </tr>
+                <tr>
+                    <td>Operating Income</td>
+                    <td>{{quarterly.previousQuarters[3].operatingIncome}} M</td>
+                    <td>{{quarterly.previousQuarters[2].operatingIncome}} M</td>
+                    <td>{{quarterly.previousQuarters[1].operatingIncome}} M</td>
+                    <td>{{quarterly.previousQuarters[0].operatingIncome}} M</td>
+                    <td>{{quarterly.latestQuarter.operatingIncome}} M</td>
+                </tr>
+                <tr>
+                    <td>Total Net Income</td>
+                    <td>{{quarterly.previousQuarters[3].totalNetIncome}} M</td>
+                    <td>{{quarterly.previousQuarters[2].totalNetIncome}} M</td>
+                    <td>{{quarterly.previousQuarters[1].totalNetIncome}} M</td>
+                    <td>{{quarterly.previousQuarters[0].totalNetIncome}} M</td>
+                    <td>{{quarterly.latestQuarter.totalNetIncome}} M</td>
+                </tr>
+                <tr>
+                    <td>Diluted EPS (Net Income)</td>
+                    <td>{{quarterly.previousQuarters[3].dilutedEPS}} M</td>
+                    <td>{{quarterly.previousQuarters[2].dilutedEPS}} M</td>
+                    <td>{{quarterly.previousQuarters[1].dilutedEPS}} M</td>
+                    <td>{{quarterly.previousQuarters[0].dilutedEPS}} M</td>
+                    <td>{{quarterly.latestQuarter.dilutedEPS}} M</td>
+                </tr>
+            </tbody>
+        </table>
+    </tab>
+</tabset>

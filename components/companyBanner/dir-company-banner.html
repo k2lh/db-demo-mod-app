@@ -1,0 +1,47 @@
+    <div ng-controller="mapController" id="map_canvas"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="header-box">
+                    <div class="color color-{{whois.marketingPreScreenScore}}">
+                        <div class="text-right" ng-show="whois.marketingPreScreenScore">pre-screen score: {{whois.marketingPreScreenScore}}</div>
+                    </div>
+                    <h2>{{whois.name}}</h2>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="def">Main:</td>
+                                <td>{{whois.phones.phoneNumber[0].countryCode}} {{whois.phones.phoneNumber[0].areaCode}} {{whois.phones.phoneNumber[0].phoneNumber}}</td>
+                            </tr>
+                            <tr>
+                                <td class="def">URL:</td>
+                                <td>{{whois.primaryURLs.primaryUrl[0].url}}</td>
+                            </tr>
+                            <tr>
+                                <td class="def">DUNS:</td>
+                                <td>{{whois.duns}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="address">
+                            <p>{{whois.locations.location[0].address1}}</p>
+                            <p ng-show="whois.locations.location[0].address2">{{whois.locations.location[0].address2}}</p>
+                            <p>{{whois.locations.location[0].city}}, {{whois.locations.location[0].state}}</p>
+                            <p>{{whois.locations.location[0].country}}</p>
+                        </div>
+                        <div class="logo">
+                            <img src="http://dnbdirectapps.com/rest/company/{{whois.duns}}/logo?format=gif" class="logo-img"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="below-map">
+                    <button class="btn btn-primary btn-large" ng-click="togCall()">Company Call Prep</button>
+                    <!-- <button class="btn btn-primary btn-large" ng-click="togPeople()">View Contacts</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+

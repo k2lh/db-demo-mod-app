@@ -1,0 +1,14 @@
+    <div class="sidebar left">
+        <h3>Use Case</h3>
+            {{about.useCase}}
+
+        <h3>Description</h3>
+            {{about.description}}
+
+        <h3>Modules</h3>
+        <div ng-repeat="t in about.tags">
+            <a ui-sref=".{{t.val}}">{{t.name}}</a>
+        </div>
+
+    </div>
+

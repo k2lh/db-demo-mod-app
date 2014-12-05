@@ -1,0 +1,26 @@
+<div  ng-controller="peopleCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Company Financial Contacts</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="people-box" ng-repeat="p in results3 | limitTo:4">
+                <div class="people-image">
+                    <span ng-show="!p.image">
+                        <img src="placeholdericon.png" class="person-img no-img"/>
+                    </span>
+                    <span ng-show="p.image">
+                        <img src="[[p.image]]" class="person-img yes-image" />
+                    </span>
+                </div>
+                <div class="people-info">
+                    <div class="people-first">[[p.name]]</div>
+                    <div class="people-second">[[p.title]]</div>
+                    <div class="people-second">[[p.email]]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

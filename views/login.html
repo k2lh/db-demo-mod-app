@@ -1,0 +1,24 @@
+<div class="login-container">
+      <div class="login-box">
+            <h4>pick a widget</h4>
+            <select class="form-control" ng-model="aWidget" ng-options="widget.name for widget in widgets"></select>
+
+            <h4>enter your credentials</h4>
+            <div class="form-group">
+                <label class="sr-only" for="name">Username</label>
+                <input type="text" class="form-control" ng-model="name" placeholder="username">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="pwd">Password</label>
+                <input type="password" class="form-control" ng-model="pwd" placeholder="password">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="key">API Key</label>
+                <input type="key" class="form-control" ng-model="key" placeholder="API key">
+            </div>
+
+            <h4>start exploring!</h4>
+            <div ui-sref="main" class="btn-primary btn-lg" ng-click="setUser()">Sign in</div>
+
+      </div>
+</div>

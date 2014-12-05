@@ -1,0 +1,33 @@
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-8">
+                <h4>{{pageTitle}} API Demo</h4>
+            </div>
+            <!--
+            <theme-switcher urls="theme.urls"></theme-switcher>
+            <div class="col-md-2 col-sm-2 navbar-right">
+                <div ng-repeat="theme in themes">
+                    <a class="btn btn-default" href ng-click="setTheme(theme)">[[theme.name]]</a>
+                </div>
+            </div>
+            -->
+            <div class="col-md-4 col-sm-4">
+                <div class="btn-group pull-right dropdown-group" dropdown is-open="status.isopen">
+                    <button type="button" class="btn btn-default dropdown-toggle" ng-disabled="disabled">
+                        Select a page <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#financialSummary">Financial Summary</a></li>
+                        <li><a href="#callPrep">Company Call Prep</a></li>
+                        <li><a href="#companyInsight">Company Insight</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Industry Call Prep</a></li>
+                        <li><a href="#">Industry Insight</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">log out</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
