@@ -8,4 +8,4 @@ Demo fullstack JS app using
 * RESTful API
 * Google Maps
 
-[Demo](https://vast-everglades-5872.herokuapp.com)
+[Demo](https://vast-everglades-5872.herokuapp.com/index.html#/financialSummary)
